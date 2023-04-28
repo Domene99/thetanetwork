@@ -1,0 +1,6 @@
+networks: 
+    default: Theta Testnet
+dotenv: .env
+wallets:
+  from_key: ${PRIVATE_KEY}
+  from_key_2: ${PRIVATE_KEY_2}
