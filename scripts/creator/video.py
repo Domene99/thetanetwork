@@ -1,8 +1,4 @@
 import requests
-# import os
-# import time
-# from dotenv import load_dotenv
-# load_dotenv(".env")
 
 
 class ThethaVideoWrapper:
@@ -16,7 +12,7 @@ class ThethaVideoWrapper:
     
     def createUploadId(self):
         response = requests.post(self.create_uri, headers=self.headers_theta)
-        print(response.json())
+        # print(response.json())
         self.url_id = response.json()["body"]["uploads"][0]["id"]
         self.presigned_url = response.json()["body"]["uploads"][0]["presigned_url"]
     
@@ -28,9 +24,9 @@ class ThethaVideoWrapper:
     def transcode(self):
         self.headers_theta["Content-Type"] = "application/json"
         response = requests.post(self.transcode_uri, 
-                             json = {"source_upload_id": self.url_id, "playback_policy":"public","nft_collection":"0x5d0004fe2e0ec6d002678c7fa01026cabde9e793"},
+                             json = {"source_upload_id": self.url_id, "playback_policy":"public"},
                              headers = self.headers_theta)
-        # print(response.text)
+        print(response.json())
         self.play_id = response.json()["body"]["videos"][0]["id"]
     
     def waitForPlaybackUrl(self):
@@ -43,14 +39,3 @@ class ThethaVideoWrapper:
         self.player_url = response.json()["body"]["videos"][0]["player_uri"]
         self.playback_url = response.json()["body"]["videos"][0]["playback_uri"]
         return True
-
-
-
-# thetaVideo = ThethaVideoWrapper(os.getenv('SA_ID'), os.getenv('SA_SECRET'), "test.mp4")
-# thetaVideo.createUploadId()
-# thetaVideo.upload()
-# thetaVideo.transcribe()
-# start = time.time()
-# thetaVideo.waitForPlaybackUrl()
-# end = time.time()
-# print(end - start, thetaVideo.player_url)

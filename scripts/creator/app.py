@@ -64,7 +64,7 @@ def app():
     uploaded_file = st.sidebar.file_uploader('##### Upload a video :arrow_up_small:', type=[
                                               'mp4'], accept_multiple_files=False)
 
-    address = st.text_input('Public address:', placeholder = '0x...')
+    address = st.text_input('Public address you wish to be donated to:', placeholder = '0x...')
     sc["address"] = address
 
     if uploaded_file is not None:
@@ -78,9 +78,10 @@ def app():
             nlp = NLPWrapper(os.getenv("OPENAI_KEY"), os.getenv("email"), os.getenv("pwd"))
 
             with st.spinner("Transcribing video... :mag_right::hourglass_flowing_sand:"):
-                nlp.transcribeFake(vid)
+                nlp.transcribe(vid)
             with st.spinner("Extracting features from video... :mag_right::hourglass_flowing_sand:"):
                 _proccessText(nlp)
+            
             
             thetaVideo = ThethaVideoWrapper(os.getenv('SA_ID'), os.getenv('SA_SECRET'), bytes_data)
             with st.spinner("Creating file url... :mag_right::hourglass_flowing_sand:"):
@@ -99,8 +100,7 @@ def app():
                 tx_hash = addVideo(sc["address"], sc["player_uri"], sc["playback_uri"], sc["swear_count"], sc["topics"],
                     sc["sentiments"], sc["safety_score"], sc["languages"])
             
-            st.write(':paperclip:')
-            st.write(f'{thetaVideo.player_url}')
+            st.write(f':paperclip:{thetaVideo.player_url}')
             st.write("Transaction:")
             st.write(tx_hash)
 

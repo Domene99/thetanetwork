@@ -7,16 +7,16 @@ import json
 def addVideo(address, player_uri, playback_uri, swear_count, topicKeys, topicValues, safety_score, languages):
     load_dotenv(".env")
     account_private = os.getenv("PRIVATE_KEY")
-    account_address = "0x7394B6c17FDa8e1d39898FBA8b532B66013C5Eed"
+    account_address = "SOME ADDDRESS"
 
     # Connect to theta testnet
     w3 = Web3(Web3.HTTPProvider('https://eth-rpc-api-testnet.thetatoken.org/rpc'))
 
     # Take advantage of brownie deployment to get latest contract address and abi
-    with open("/home/domene/Documents/hacks/thetanetwork/build/deployments/map.json") as f:
+    with open("PATH TO YOUR build\\deployments\\map.json") as f:
         map = json.load(f)
     video_contract = map["365"]["VideoProcessing"][0]
-    with open("/home/domene/Documents/hacks/thetanetwork/build/deployments/365/" + video_contract + ".json") as f:
+    with open("PATH TO YOUR build\\deployments\\ CHAIN ID \\" + video_contract + ".json") as f:
         contract = json.load(f)
     abi = contract["abi"]
 

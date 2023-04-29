@@ -1,9 +1,6 @@
 import openai
 import mindsdb_sdk as mdb
 import moviepy.editor as mp
-# import os
-# from dotenv import load_dotenv
-# load_dotenv(".env")
 
 class NLPWrapper:
     def __init__(self, openai_key, mdb_email, mdb_pass):
@@ -11,13 +8,13 @@ class NLPWrapper:
         self.mdb_pass = mdb_pass
         openai.api_key = openai_key
     
-    def transcribeFake(self, file_name):
-        audio = mp.VideoFileClip(file_name).audio
-        audio.write_audiofile("audio.mp3")
-        audio_file= open("audio.mp3", "rb")
-        res = {"text": "Here is a test in which I am clearly talking a lot. I am talking about various topics. I am talking about vaping. I am talking about iPhones, Androids. I am talking about technology. I am talking about pen and paper. I am talking about programming, Python, JavaScript. I fucking hate marvel. Aunque tambien hablo espanol."}
+    # def transcribeFake(self, file_name):
+    #     audio = mp.VideoFileClip(file_name).audio
+    #     audio.write_audiofile("audio.mp3")
+    #     audio_file= open("audio.mp3", "rb")
+    #     res = {"text": "Here is a test in which I am clearly talking a lot. I am talking about various topics. I am talking about vaping. I am talking about iPhones, Androids. I am talking about technology. I am talking about pen and paper. I am talking about programming, Python, JavaScript. I fucking hate marvel. Aunque tambien hablo espanol."}
         
-        self.transcribed_text = res['text']
+    #     self.transcribed_text = res['text']
 
     def transcribe(self, file_name):
         audio = mp.VideoFileClip(file_name).audio
